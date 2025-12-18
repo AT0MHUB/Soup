@@ -9,15 +9,38 @@ soup = [
 ]
 
 words = ['ORRAC','CASA','CARRO','ROSAS','SOSA','COSAS','SARRO','SARSA','SAROS','SARRO','SARSA','SAROS','SARRO']
-for word in words:
-  # busqueda horizontal
-  for row in range(len(soup)):                      # recorremos las filas
-     for col in range(len(soup[0]) - len(word) + 1): # comparamos la palabra con la fila para verificar si cabe la palabra y recorremos las columnas
-        found = True
-        for i in range(len(word)):
-           if soup[row][col + i] != word[i]:
-              found = False
-              break
-        if found:
-          print(f"{word} -> encontrada horizontalmente en la fila {row+1}, columna {col+1}")
+word = 'CARRO'
 
+derecha = 0, 1
+izquierda = 0, -1
+abajo = 1, 0
+arriba = -1, 0
+diagonal_abajo_derecha = 1, 1
+diagonal_arriba_izquierda = -1, -1
+diagonal_arriba_derecha = -1, 1
+diagonal_abajo_izquierda = 1, -1
+
+dx = [0, 0, 1, -1, 1, -1, -1, 1]
+dy = [1, -1, 0, 0, 1, -1, 1, -1]
+
+def buscar_palabras(soup, word, dx, dy):
+   rows = len(soup)   #definimos el tamaño de la sopa verticalmente
+   columns = len(soup[0])  # definimos el tamaño de la sopa horizontalmente
+   for row in range(rows):   #recorremos las filas
+      for col in range(columns):  #recorremos las columnas
+         found = True
+         for i in range(len(word)): #comparamos letra por letra
+            f = row + i * dx
+            c = col + i * dy
+            if f < 0 or f >= rows or c < 0 or c >= columns:
+               found = False
+               break
+
+            if soup[f][c] != word[i]:
+               found = False
+               break
+
+         if found:
+            print(f"{word} encontrada en la fila {row+1}, columna {col+1} dirección ({dx},{dy}).")
+
+buscar_palabras(soup, word, 0, 1)

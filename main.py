@@ -77,3 +77,4 @@ for word in words:
                 break
           if found:
              print(f"{word} -> encontrada diagonalmente invertida en la fila {row+1}, columna {col+1}")
+
