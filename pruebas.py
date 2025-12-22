@@ -23,24 +23,97 @@ diagonal_abajo_izquierda = 1, -1
 dx = [0, 0, 1, -1, 1, -1, -1, 1]
 dy = [1, -1, 0, 0, 1, -1, 1, -1]
 
-def buscar_palabras(soup, word, dx, dy):
-   rows = len(soup)   #definimos el tamaño de la sopa verticalmente
-   columns = len(soup[0])  # definimos el tamaño de la sopa horizontalmente
-   for row in range(rows):   #recorremos las filas
-      for col in range(columns):  #recorremos las columnas
-         found = True
-         for i in range(len(word)): #comparamos letra por letra
-            f = row + i * dx
-            c = col + i * dy
-            if f < 0 or f >= rows or c < 0 or c >= columns:
-               found = False
-               break
+# Lista de pares [dx, dy] para las 8 direcciones
+direcciones = [
+    [-1, 0], [1, 0], [0, 1], [0, -1], # Ortogonales
+    [-1, -1], [-1, 1], [1, -1], [1, 1] # Diagonales
+]
 
-            if soup[f][c] != word[i]:
-               found = False
-               break
+def buscar_palabra(soup, word):
+   direcciones = [[-1, 0], [1, 0], [0, 1], [0, -1],[-1, -1], [-1, 1], [1, -1], [1, 1]]
+   rows = len(soup)
+   columns = len(soup[0])
+   for row in range(rows):
+      for col in range(columns):
+         for df, dc in direcciones:
+            for i in range(len(word)): 
+               f = row + i * df
+               c = col + i * dc
+               if 0 <= f < rows and 0 <= c < columns:
+                  if soup[f][c].lower() == word[i].lower():
+                     return print(f"la palabra {word} fue encontrada en la fila {row + 1}")
+                  else:
+                     break
+               else:
+                  break
+buscar_palabra(soup,"CARRo")
+   
+# busqueda horizontal
+for word in words:
+  for row in range(len(soup)):                      # recorremos las filas
+    for col in range(len(soup[0]) - len(word) + 1): # comparamos la palabra con la fila para verificar si cabe la palabra y recorremos las columnas
+      found = True
+      for i in range(len(word)):
+        if soup[row][col + i] != word[i]:
+          found = False
+          break
+      if found:
+        print(f"{word} -> encontrada horizontalmente en la fila {row+1}, columna {col+1}")
 
-         if found:
-            print(f"{word} encontrada en la fila {row+1}, columna {col+1} dirección ({dx},{dy}).")
 
-buscar_palabras(soup, word, 0, 1)
+# busqueda vertical
+  for row in range(len(soup) - len(word) + 1):     # recorremos las filas para verificar si cabe la palabra verticalmente esto tambien                                                            establece  un limite para no salirnos del rango de la matriz
+    for col in range(len(soup[0])):                # recorremos las columnas
+      found = True                                 # asumimos que la palabra se encuentra en la fila y columna actual
+      for i in range(len(word)):                   #recorremos la palabra letra por letra
+        if soup[row + i][col] != word[i]:          #comparamos la letra de la palabra con la letra de la fila y columna actual
+          found = False                            # si no coinciden, la palabra no se encuentra en la fila y columna actual
+          break                                    # rompemos el ciclo
+      if found:                                    # si se encuentra la palabra
+        print(f"{word} -> encontrada verticalmente en la fila {row+1}, columna {col+1}")
+
+  #busqueda diagonal
+  for row in range(len(soup) - len(word) + 1):     # recorremos las filas para verificar si cabe la palabra diagonalmente esto tambien                                                            establece  un limite para no salirnos del rango de la matriz
+     for col in range(len(soup[0]) - len(word) + 1): # comparamos la palabra con la fila para verificar si cabe la palabra diagonalmente
+        found = True
+        for i in range(len(word)):
+           if soup[row + i][col + i] != word[i]:  # comparamos la letra de la palabra con la letra de la fila y columna actual
+              found = False
+              break
+        if found:
+           print(f"{word} -> encontrada diagonalmente en la fila {row+1}, columna {col+1}")
+
+  #busqueda horizontal invertida
+
+  for row in range(len(soup)):                                    # recorremos las filas
+    for col in range(len(word) - 1, len(soup[0])): # comparamos la palabra con la fila de derecha a izquierda
+      found = True
+      for i in range(len(word)):
+        if soup[row][col - i] != word[i]:
+          found = False
+          break
+      if found:
+        print(f"{word} -> encontrada horizontalmente invertida en la fila {row+1}, columna {col+1}")
+
+  #busqueda vertical invertida
+  for row in range(len(word) - 1, len(soup)): # recorremos las filas de abajo hacia arriba
+     for col in range(len(soup[0])):                      # recorremos las columnas
+        found = True
+        for i in range(len(word)):
+           if soup[row - i][col] != word[i]:
+              found = False
+              break
+        if found:
+           print(f"{word} -> encontrada verticalmente invertida en la fila {row+1}, columna {col+1}")
+
+  #busqueda diagonal invertida
+  for row in range(len(word) - 1, len(soup)): # recorremos las filas de abajo hacia arriba diagonalmente
+       for col in range(len(word) - 1, len(soup[0])): # recorremos las columnas de derecha a izquierda  diagonalmente
+          found = True
+          for i in range(len(word)):
+             if soup[row - i][col - i] != word[i]:
+                found = False
+                break
+          if found:
+             print(f"{word} -> encontrada diagonalmente invertida en la fila {row+1}, columna {col+1}")
+
