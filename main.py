@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 def preparar_imagen(ruta_imagen):
     # 1. Cargar la imagen
