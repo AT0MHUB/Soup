@@ -4,6 +4,7 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
+packages = ["libGL", "libGLU"]
 
 [workflows]
 runButton = "Project"
@@ -20,10 +21,11 @@ args = "Word Search"
 [[workflows.workflow]]
 name = "Word Search"
 author = "agent"
+mode = "sequential"
+
+[workflows.workflow.metadata]
+outputType = "console"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python main.py"
-
-[workflows.workflow.metadata]
-outputType = "console"
