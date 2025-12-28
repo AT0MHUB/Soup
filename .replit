@@ -29,3 +29,11 @@ outputType = "console"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python main.py"
+
+[[workflows.workflow]]
+name = "cv2.py"
+mode = "sequential"
+author = 37371791
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
