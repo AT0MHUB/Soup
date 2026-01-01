@@ -18,6 +18,10 @@ author = "agent"
 task = "workflow.run"
 args = "Word Search"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Draw Line"
+
 [[workflows.workflow]]
 name = "Word Search"
 author = "agent"
@@ -38,3 +42,14 @@ author = 37371791
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python pcv2.py"
+
+[[workflows.workflow]]
+name = "Draw Line"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python pcv2.py"
+
+[workflows.workflow.metadata]
+outputType = "console"
