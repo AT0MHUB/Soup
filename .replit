@@ -35,17 +35,9 @@ task = "shell.exec"
 args = "python main.py"
 
 [[workflows.workflow]]
-name = "pcv2.py"
-mode = "sequential"
-author = 37371791
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python pcv2.py"
-
-[[workflows.workflow]]
 name = "Draw Line"
 author = "agent"
+mode = "parallel"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -53,3 +45,12 @@ args = "python pcv2.py"
 
 [workflows.workflow.metadata]
 outputType = "console"
+
+[[workflows.workflow]]
+name = "pcv2.py"
+mode = "parallel"
+author = 37371791
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python pcv2.py"
