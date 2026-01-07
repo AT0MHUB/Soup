@@ -1,25 +1,31 @@
-# Word Search (Sopa de Letras)
+# 🧩 SOPA DE LETRAS INTELIGENTE (PYTHON)
 
-## Overview
-A Python console program that finds words in a word search puzzle grid. The program searches in all 8 directions (horizontal, vertical, and diagonal).
+## 📌 DESCRIPCIÓN
+Este proyecto implementa una sopa de letras en Python capaz de **buscar palabras en una cuadrícula en todas las direcciones** y **mostrar visualmente la sopa con las palabras encontradas marcadas**.
 
-## Project Structure
-- `main.py` - Main program containing the word search grid and search algorithm
-- `.gitignore` - Python-specific git ignore rules
+El objetivo principal es reforzar conceptos de **lógica de programación, coordenadas y recorrido de matrices**, conectando programación tradicional con visión por computador.
 
-## How to Run
-Run the program using:
-```bash
-python main.py
-```
+---
 
-Or use the "Word Search" workflow in Replit.
+## ⚙️ FUNCIONALIDADES
+- Representación de la sopa como una matriz 2D
+- Búsqueda de palabras en **8 direcciones**:
+  - Horizontal (derecha e izquierda)
+  - Vertical (arriba y abajo)
+  - Diagonales (en ambos sentidos)
+- Búsqueda **independiente de mayúsculas y minúsculas**
+- Identificación de la:
+  - Fila y columna inicial
+  - Dirección de la palabra encontrada
+- **Marcado visual de las palabras encontradas** dentro de la sopa
+- Uso de coordenadas `(fila, columna)` para recorrer y resaltar letras
+- Base preparada para trabajar con **imágenes reales** usando OpenCV
 
-## Features
-- Searches for words in all 8 directions
-- Displays the word grid visually
-- Reports the position and direction of found words
-- Spanish language interface
+---
 
-## Recent Changes
-- 2025-12-16: Initial Replit setup, converted data file to runnable program
+## 🧠 CONCEPTOS APLICADOS
+- Bucles y condicionales
+- Variables booleanas para control de flujo
+- Listas y matrices
+- Vectores de movimiento `(df, dc)`
+- Separación entr
